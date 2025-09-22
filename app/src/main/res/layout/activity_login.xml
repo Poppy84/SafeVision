@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp"
+    android:gravity="center"
+    android:background="#ffffff">
+
+    <!-- Logo/Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="🔒 SafeVision"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="60dp" />
+
+    <!-- Campo Usuario -->
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:hint="Usuario"
+        android:padding="15dp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="20dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999" />
+
+    <!-- Campo Contraseña -->
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        android:background="@drawable/edittext_border"
+        android:layout_marginBottom="30dp"
+        android:textColor="#333333"
+        android:textColorHint="#999999" />
+
+    <!-- Botón Login -->
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="Iniciar Sesión"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:backgroundTint="#2196F3"
+        android:textColor="#ffffff"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Texto de registro -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¿Primera vez? Crear cuenta"
+        android:textColor="#2196F3"
+        android:textSize="14sp"
+        android:clickable="true"
+        android:focusable="true" />
+
+</LinearLayout>

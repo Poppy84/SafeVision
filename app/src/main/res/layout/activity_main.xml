@@ -1,119 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#f5f5f5">
 
-    <!-- Logo -->
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="137dp"
-        android:layout_height="229dp"
-        app:srcCompat="@drawable/safevision_logo2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
-
-    <!-- Texto debajo del logo -->
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvWelcome"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Seguridad inteligente"
-        android:textSize="18sp"
+        android:text="Bienvenido"
+        android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="60dp" />
 
-    <!-- Label correo -->
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Correo:"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginStart="32dp" />
-
-    <!-- Campo correo -->
-    <EditText
-        android:id="@+id/editTextTextEmailAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@id/textView"
-        app:layout_constraintStart_toEndOf="@id/textView2"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="24dp"/>
-
-    <!-- Label contraseña -->
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña:"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextEmailAddress"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="32dp" />
-
-    <!-- Campo contraseña -->
-    <EditText
-        android:id="@+id/editTextTextPassword"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextEmailAddress"
-        app:layout_constraintStart_toEndOf="@id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="16dp" />
-
-    <!-- Botón login -->
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Iniciar sesión"
-        app:layout_constraintTop_toBottomOf="@id/editTextTextPassword"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        android:id="@+id/btnFaces"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="👤 Gestión de Rostros"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
 
-    <!-- Olvidaste contraseña -->
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿Olvidaste tu contraseña?"
-        android:textColor="?android:attr/textColorLink"
-        app:layout_constraintTop_toBottomOf="@id/button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+    <Button
+        android:id="@+id/btnAlerts"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="🚨 Alertas de Seguridad"
+        android:textSize="16sp"
+        android:layout_marginBottom="20dp" />
 
-    <!-- Crear cuenta -->
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crear una cuenta"
-        android:textColor="?android:attr/textColorLink"
-        app:layout_constraintTop_toBottomOf="@id/textView4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Cerrar Sesión"
+        android:backgroundTint="#ff4444"
+        android:textColor="#ffffff" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

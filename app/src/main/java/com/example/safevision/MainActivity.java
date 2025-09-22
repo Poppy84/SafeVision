@@ -3,86 +3,66 @@ package com.example.safevision;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText editTextEmail, editTextPassword;
-    private Button buttonLogin;
-    private TextView textForgotPassword, textCreateAccount;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Referencias a los elementos del XML
-        editTextEmail = findViewById(R.id.editTextTextEmailAddress);
-        editTextPassword = findViewById(R.id.editTextTextPassword);
-        buttonLogin = findViewById(R.id.button);
-        textForgotPassword = findViewById(R.id.textView4);
-        textCreateAccount = findViewById(R.id.textView5);
+        prefs = getSharedPreferences("SafeVision", MODE_PRIVATE);
+        checkAuthentication();
 
-        // Acción para el botón "Iniciar sesión"
-        //Refactorizar
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String email = editTextEmail.getText().toString().trim().toLowerCase();
-                String password = editTextPassword.getText().toString().trim();
+        setupUI();
+    }
 
-                if (email.isEmpty() || password.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Por favor ingresa tus datos", Toast.LENGTH_SHORT).show();
-                } else {
-                    // Recuperar datos de SharedPreferences
-                    SharedPreferences prefs = getSharedPreferences("SafeVisionPrefs", MODE_PRIVATE);
-                    String savedEmail = prefs.getString("correo", null);
-                    String savedPassword = prefs.getString("password", null);
+    private void checkAuthentication() {
+        if (!prefs.contains("auth_token")) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
-                    if (savedEmail != null && savedPassword != null &&
-                            email.equals(savedEmail) && password.equals(savedPassword)) {
+    private void setupUI() {
+        TextView tvWelcome = findViewById(R.id.tvWelcome);
+        Button btnFaces = findViewById(R.id.btnFaces);
+        Button btnAlerts = findViewById(R.id.btnAlerts);
+        Button btnLogout = findViewById(R.id.btnLogout);
 
+        String username = prefs.getString("username", "Usuario");
+        tvWelcome.setText("Hola, " + username);
 
-
-                        Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-                        Intent intent = new Intent(MainActivity.this, HomeActivity.class);
-                        startActivity(intent);
-                        finish();
-
-                    } else {
-                        Toast.makeText(MainActivity.this, "Correo o contraseña incorrectos", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            }
+        btnFaces.setOnClickListener(v -> {
+            // Llamar a FaceManagementActivity
+            Intent intent = new Intent(MainActivity.this, FaceManagementActivity.class);
+            startActivity(intent);
         });
 
-
-
-        // Acción para "¿Olvidaste tu contraseña?"
-        //Refactorizar
-        textForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
+        btnAlerts.setOnClickListener(v -> {
+            Toast.makeText(this, "Alertas próximamente", Toast.LENGTH_SHORT).show();
         });
 
-        // Acción para "Crear una cuenta"
-        //Refactorizar
-        textCreateAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                startActivity(intent);
-            }
+        btnLogout.setOnClickListener(v -> {
+            logout();
         });
+    }
+
+    private void logout() {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.apply();
+
+        Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
