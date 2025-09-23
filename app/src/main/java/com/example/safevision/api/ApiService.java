@@ -1,9 +1,9 @@
 package com.example.safevision.api;
 
-import com.safevision.models.LoginRequest;
-import com.safevision.models.LoginResponse;
-import com.safevision.models.User;
-import com.safevision.models.ApiResponse;
+import com.example.safevision.models.LoginRequest;
+import com.example.safevision.models.LoginResponse;
+import com.example.safevision.models.User;
+import com.example.safevision.models.ApiResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

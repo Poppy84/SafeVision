@@ -35,6 +35,10 @@
             android:name=".LoginActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
         <!-- Face Management Activity -->
         <activity
             android:name=".FaceManagementActivity"
@@ -43,6 +47,18 @@
         <!-- Alerts Activity -->
         <activity
             android:name=".AlertsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HomeActivity"
             android:exported="false" />
 
     </application>

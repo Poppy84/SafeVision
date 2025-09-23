@@ -19,16 +19,31 @@ public class LoginActivity extends AppCompatActivity {
 
         prefs = getSharedPreferences("SafeVision", MODE_PRIVATE);
 
+        // Verificar si ya está logueado (redirigir a MainActivity)
+        checkIfLoggedIn();
+
         Button btnLogin = findViewById(R.id.btnLogin);
+        Button btnRegister = findViewById(R.id.btnRegister);
+
         btnLogin.setOnClickListener(v -> attemptLogin());
+        btnRegister.setOnClickListener(v -> openRegisterActivity());
+    }
+
+    private void checkIfLoggedIn() {
+        if (prefs.contains("auth_token")) {
+            // Si ya está logueado, ir directamente a MainActivity
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     private void attemptLogin() {
         EditText etUsername = findViewById(R.id.etUsername);
         EditText etPassword = findViewById(R.id.etPassword);
 
-        String username = etUsername.getText().toString();
-        String password = etPassword.getText().toString();
+        String username = etUsername.getText().toString().trim();
+        String password = etPassword.getText().toString().trim();
 
         if (username.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show();
@@ -43,9 +58,15 @@ public class LoginActivity extends AppCompatActivity {
 
         Toast.makeText(this, "¡Bienvenido " + username + "!", Toast.LENGTH_SHORT).show();
 
-        // Ir a MainActivity (pantalla principal)
+        // Ir a MainActivity
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        finish(); // Cerrar LoginActivity para que no se pueda volver con back
+        finish();
+    }
+
+    private void openRegisterActivity() {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
+        // No usar finish() para que pueda volver al login si presiona "back"
     }
 }
