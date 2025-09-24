@@ -1,44 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:background="#f5f5f5">
+    android:background="#f5f5f5"
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvWelcome"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Bienvenido"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="60dp" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/btnFaces"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="👤 Gestión de Rostros"
-        android:textSize="16sp"
-        android:layout_marginBottom="20dp" />
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#2196F3"
+            android:padding="20dp"
+            android:layout_marginBottom="16dp">
 
-    <Button
-        android:id="@+id/btnAlerts"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="🚨 Alertas de Seguridad"
-        android:textSize="16sp"
-        android:layout_marginBottom="20dp" />
+            <TextView
+                android:id="@+id/tvWelcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="¡Hola, Usuario!"
+                android:textColor="#ffffff"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:gravity="center" />
 
-    <Button
-        android:id="@+id/btnLogout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:text="Cerrar Sesión"
-        android:backgroundTint="#ff4444"
-        android:textColor="#ffffff" />
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="✅ Conectado al Servidor"
+                android:textColor="#e3f2fd"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_marginTop="8dp" />
 
-</LinearLayout>
+        </LinearLayout>
+
+        <!-- Panel de Estadísticas -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📊 Estado del Sistema"
+                android:textColor="#333333"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Monitoreo activo las 24/7\nAlertas en tiempo real"
+                android:textColor="#666666"
+                android:textSize="14sp"
+                android:lineSpacingExtra="4dp" />
+
+        </LinearLayout>
+
+        <!-- Botones Principales -->
+        <Button
+            android:id="@+id/btnRegisterFace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="➕ Registrar Nuevo Rostro"
+            android:textSize="16sp"
+            android:backgroundTint="#4CAF50"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/btnViewFaces"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="👥 Ver Rostros Guardados"
+            android:textSize="16sp"
+            android:backgroundTint="#2196F3"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/btnAlerts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🚨 Alertas de Seguridad"
+            android:textSize="16sp"
+            android:backgroundTint="#FF9800"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="8dp"
+            android:padding="16dp" />
+
+        <Button
+            android:id="@+id/btnLiveView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📡 Vista en Vivo"
+            android:textSize="16sp"
+            android:backgroundTint="#9C27B0"
+            android:textColor="#ffffff"
+            android:layout_marginBottom="16dp"
+            android:padding="16dp" />
+
+        <!-- Botones Secundarios -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⚙️ Ajustes"
+                android:backgroundTint="#607D8B"
+                android:textColor="#ffffff"
+                android:layout_marginEnd="4dp"
+                android:padding="12dp" />
+
+            <Button
+                android:id="@+id/btnLogout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="🚪 Cerrar Sesión"
+                android:backgroundTint="#F44336"
+                android:textColor="#ffffff"
+                android:layout_marginStart="4dp"
+                android:padding="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -7,19 +7,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.100:5000/api/";
+    private static final String BASE_URL = "http://192.168.1.174:5000/api/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
         if (retrofit == null) {
+            // ✅ INTERCEPTOR DE LOGS DETALLADO
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY); // ← MUY IMPORTANTE
 
             OkHttpClient client = new OkHttpClient.Builder()
-                    .connectTimeout(60, TimeUnit.SECONDS)
-                    .readTimeout(60, TimeUnit.SECONDS)
-                    .writeTimeout(60, TimeUnit.SECONDS)
-                    .addInterceptor(logging)
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .addInterceptor(logging) // ← AÑADE ESTO
                     .build();
 
             retrofit = new Retrofit.Builder()
@@ -30,6 +31,7 @@ public class ApiClient {
         }
         return retrofit;
     }
+
 
     public static ApiService getApiService() {
         return getClient().create(ApiService.class);

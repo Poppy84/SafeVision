@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="250dp"
+    android:height="250dp"
+    android:viewportWidth="250"
+    android:viewportHeight="250">
+
+    <!-- Círculo exterior -->
+    <circle
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="2dp"
+        android:fillColor="#00000000"
+        android:cx="125"
+        android:cy="125"
+        android:radius="120" />
+
+    <!-- Líneas guía -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1dp"
+        android:pathData="M125,5 L125,125" />
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1dp"
+        android:pathData="M5,125 L125,125" />
+
+</vector>

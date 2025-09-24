@@ -2,15 +2,19 @@ package com.example.safevision.models;
 
 public class ApiResponse {
     private String message;
-    private boolean success;
-    private Object data;
+    private String token;
+    private int user_id;
+    private String username;
 
     public String getMessage() { return message; }
     public void setMessage(String message) { this.message = message; }
 
-    public boolean isSuccess() { return success; }
-    public void setSuccess(boolean success) { this.success = success; }
+    public String getToken() { return token; }
+    public void setToken(String token) { this.token = token; }
 
-    public Object getData() { return data; }
-    public void setData(Object data) { this.data = data; }
+    public int getUserId() { return user_id; }
+    public void setUserId(int user_id) { this.user_id = user_id; }
+
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
 }

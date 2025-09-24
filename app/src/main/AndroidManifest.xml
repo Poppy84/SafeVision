@@ -1,26 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    package="com.example.safevision">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-
-    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.SafeVision"
-        android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        android:label="SafeVision"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+        android:usesCleartextTraffic="true">
 
-        <!-- Main Activity (LAUNCHER - Pantalla principal) -->
+        <!-- SOLO las actividades que realmente existen -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -30,36 +22,9 @@
             </intent-filter>
         </activity>
 
-        <!-- Login Activity (secundaria) -->
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
-
-        <!-- Face Management Activity -->
-        <activity
-            android:name=".FaceManagementActivity"
-            android:exported="false" />
-
-        <!-- Alerts Activity -->
-        <activity
-            android:name=".AlertsActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".CameraActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".ForgotPasswordActivity"
-            android:exported="false" />
-
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".AlertsActivity" />
 
     </application>
+
 </manifest>

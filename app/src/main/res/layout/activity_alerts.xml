@@ -1,22 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="#f5f5f5">
 
-    <TextView
-        android:id="@+id/textViewTitleAlerts"
+    <!-- Header -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:background="#2196F3"
+        android:padding="16dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Alertas de Seguridad"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center" />
+
+    </LinearLayout>
+
+    <!-- Progress Bar -->
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alertas de Seguridad"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
+    <!-- Empty State Message -->
+    <TextView
+        android:id="@+id/textViewEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:padding="32dp"
+        android:text="Cargando alertas..."
+        android:textColor="#666666"
+        android:textSize="16sp"
+        android:visibility="visible" />
+
+    <!-- List View -->
     <ListView
         android:id="@+id/listViewAlerts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="16dp" />
-</LinearLayout>
+        android:layout_below="@id/headerLayout"
+        android:divider="#e0e0e0"
+        android:dividerHeight="1dp"
+        android:padding="8dp"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,58 +1,33 @@
 package com.example.safevision.models;
 
-import java.util.Date;
-
 public class User {
-    private int id;
     private String username;
-    private String email;
     private String password;
-    private String fullName;
-    private String phoneNumber;
-    private boolean isActive;
-    private Date createdAt;
-    private Date updatedAt;
+    private String email;
+    private String full_name;
+    private String phone_number;
 
-    // Constructor para registro
-    public User(String username, String email, String password, String fullName, String phoneNumber) {
+    public User(String username, String password, String email, String fullName) {
         this.username = username;
+        this.password = password;
         this.email = email;
-        this.password = password;
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
+        this.full_name = fullName;
+        this.phone_number = ""; // Opcional
     }
 
-    // Constructor para login
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
-
-    // Getters y Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-
+    // Getters y setters
     public String getUsername() { return username; }
     public void setUsername(String username) { this.username = username; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
 
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getFullName() { return fullName; }
-    public void setFullName(String fullName) { this.fullName = fullName; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getPhoneNumber() { return phoneNumber; }
-    public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+    public String getFullName() { return full_name; }
+    public void setFullName(String full_name) { this.full_name = full_name; }
 
-    public boolean isActive() { return isActive; }
-    public void setActive(boolean active) { isActive = active; }
-
-    public Date getCreatedAt() { return createdAt; }
-    public void setCreatedAt(Date createdAt) { this.createdAt = createdAt; }
-
-    public Date getUpdatedAt() { return updatedAt; }
-    public void setUpdatedAt(Date updatedAt) { this.updatedAt = updatedAt; }
+    public String getPhoneNumber() { return phone_number; }
+    public void setPhoneNumber(String phone_number) { this.phone_number = phone_number; }
 }
