@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">SafeVision</string>
-    <string name="app_description">Sistema de seguridad con reconocimiento facial</string>
 </resources>

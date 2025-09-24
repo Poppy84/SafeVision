@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-// ✅ Importaciones para la API
+// ✅ Importaciones para la API REAL (usando tus clases existentes)
 import com.example.safevision.api.ApiService;
 import com.example.safevision.api.ApiClient;
 import com.example.safevision.models.LoginRequest;
@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         prefs = getSharedPreferences("SafeVision", MODE_PRIVATE);
-        apiService = ApiClient.getApiService(); // ✅ Inicializar servicio API
+        apiService = ApiClient.getApiService(); // ✅ Usar tu ApiClient existente
 
         // Verificar si ya está logueado
         checkIfLoggedIn();
@@ -43,7 +43,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private void checkIfLoggedIn() {
         if (prefs.contains("auth_token") && !prefs.getBoolean("demo_mode", false)) {
-            // Solo redirigir si es un token real, no demo
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -62,10 +61,13 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Mostrar loading
-        Toast.makeText(this, "Conectando...", Toast.LENGTH_SHORT).show();
+        // ✅ CONEXIÓN REAL CON TU SERVIDOR (NO MÁS SIMULACIÓN)
+        performRealLogin(username, password);
+    }
 
-        // ✅ CONEXIÓN REAL CON TU API SAFEVISION
+    private void performRealLogin(String username, String password) {
+        Toast.makeText(this, "Conectando al servidor...", Toast.LENGTH_SHORT).show();
+
         LoginRequest loginRequest = new LoginRequest(username, password);
 
         Call<LoginResponse> call = apiService.login(loginRequest);
@@ -73,24 +75,30 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    // ✅ LOGIN EXITOSO CON LA API
-                    handleLoginSuccess(response.body());
+                    // ✅ LOGIN EXITOSO CON EL SERVIDOR REAL
+                    handleRealLoginSuccess(response.body());
                 } else {
-                    // ❌ Error en las credenciales
-                    handleLoginError("Usuario o contraseña incorrectos");
+                    // ❌ Error en las credenciales o servidor
+                    String errorMessage = "Error en el login";
+                    if (response.code() == 401) {
+                        errorMessage = "Usuario o contraseña incorrectos";
+                    } else if (response.code() == 500) {
+                        errorMessage = "Error interno del servidor";
+                    }
+                    handleLoginError(errorMessage);
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // ❌ Error de conexión al servidor
+                // ❌ Error de conexión al servidor (red, timeout, etc.)
                 handleConnectionError(username, t.getMessage());
             }
         });
     }
 
-    private void handleLoginSuccess(LoginResponse loginResponse) {
-        // Guardar datos reales del usuario
+    private void handleRealLoginSuccess(LoginResponse loginResponse) {
+        // Guardar datos reales del usuario desde el servidor
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("auth_token", loginResponse.getToken());
         editor.putString("username", loginResponse.getUsername());
@@ -105,7 +113,6 @@ public class LoginActivity extends AppCompatActivity {
 
         Toast.makeText(this, "¡Bienvenido " + welcomeName + "!", Toast.LENGTH_SHORT).show();
 
-        // Ir a MainActivity
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -114,32 +121,31 @@ public class LoginActivity extends AppCompatActivity {
     private void handleLoginError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
 
-        // Opcional: Limpiar campos de password
+        // Limpiar campo de password
         EditText etPassword = findViewById(R.id.etPassword);
         etPassword.setText("");
     }
 
     private void handleConnectionError(String username, String errorDetails) {
-        // ✅ Ofrecer modo demo cuando no hay conexión
+        // ✅ Mostrar error REAL de conexión
         Toast.makeText(this, "Error de conexión al servidor", Toast.LENGTH_SHORT).show();
 
         // Preguntar si quiere usar modo demo
         new android.app.AlertDialog.Builder(this)
-                .setTitle("Sin conexión")
-                .setMessage("No se puede conectar al servidor. ¿Usar modo demo?")
-                .setPositiveButton("Sí", (dialog, which) -> enableDemoMode(username))
+                .setTitle("Sin conexión al servidor")
+                .setMessage("No se puede conectar al servidor SafeVision (" + errorDetails + "). ¿Usar modo demo?")
+                .setPositiveButton("Modo Demo", (dialog, which) -> enableDemoMode(username))
                 .setNegativeButton("Reintentar", (dialog, which) -> attemptLogin())
                 .setNeutralButton("Cancelar", null)
                 .show();
     }
 
     private void enableDemoMode(String username) {
-        // ✅ Activar modo demo
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString("auth_token", "demo_token_" + System.currentTimeMillis());
         editor.putString("username", username);
         editor.putString("full_name", username);
-        editor.putBoolean("demo_mode", true); // ✅ Marcar como demo
+        editor.putBoolean("demo_mode", true);
         editor.apply();
 
         Toast.makeText(this, "Modo demo activado", Toast.LENGTH_SHORT).show();
@@ -150,14 +156,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void openRegisterActivity() {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, "Registro próximamente", Toast.LENGTH_SHORT).show();
+        // Intent intent = new Intent(this, RegisterActivity.class);
+        // startActivity(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // Limpiar modo demo al volver al login
         if (prefs.getBoolean("demo_mode", false)) {
             SharedPreferences.Editor editor = prefs.edit();
             editor.remove("demo_mode");

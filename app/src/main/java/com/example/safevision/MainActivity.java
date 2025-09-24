@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateDashboard(); // Actualizar datos al volver a la actividad
+        updateDashboard();
     }
 
     private void checkAuthentication() {
@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         Button btnSettings = findViewById(R.id.btnSettings);
         Button btnLogout = findViewById(R.id.btnLogout);
 
-        // Actualizar información del usuario
         String username = prefs.getString("username", "Usuario");
         String fullName = prefs.getString("full_name", "");
 
@@ -62,15 +61,16 @@ public class MainActivity extends AppCompatActivity {
             tvWelcome.setText("¡Hola, " + username + "!");
         }
 
-        // Configurar listeners de botones
         btnRegisterFace.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RegisterFaceActivity.class);
-            startActivity(intent);
+            Toast.makeText(this, "Registro de rostros próximamente", Toast.LENGTH_SHORT).show();
+            // Intent intent = new Intent(MainActivity.this, RegisterFaceActivity.class);
+            // startActivity(intent);
         });
 
         btnViewFaces.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, FaceManagementActivity.class);
-            startActivity(intent);
+            Toast.makeText(this, "Gestión de rostros próximamente", Toast.LENGTH_SHORT).show();
+            // Intent intent = new Intent(MainActivity.this, FaceManagementActivity.class);
+            // startActivity(intent);
         });
 
         btnAlerts.setOnClickListener(v -> {
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateDashboard() {
-        // Actualizar estado del sistema
         boolean isDemoMode = prefs.getBoolean("demo_mode", false);
 
         if (isDemoMode) {
@@ -107,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openLiveView() {
-        // Verificar si estamos en modo demo
         boolean isDemoMode = prefs.getBoolean("demo_mode", false);
 
         if (isDemoMode) {
@@ -115,18 +113,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // Abrir vista en vivo en el navegador o WebView
         try {
-            String serverUrl = "http://10.167.78.183:5000/monitor"; // Tu IP del servidor
+            // Usar una URL genérica o configurable
+            String serverUrl = "https://www.google.com"; // URL de ejemplo
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, android.net.Uri.parse(serverUrl));
             startActivity(browserIntent);
         } catch (Exception e) {
-            Toast.makeText(this, "Error abriendo vista en vivo: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
     private void logout() {
-        // Mostrar diálogo de confirmación
         new android.app.AlertDialog.Builder(this)
                 .setTitle("Cerrar Sesión")
                 .setMessage("¿Estás seguro de que quieres cerrar sesión?")
@@ -142,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(this, "Sesión cerrada exitosamente", Toast.LENGTH_SHORT).show();
 
-        // Redirigir al login
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

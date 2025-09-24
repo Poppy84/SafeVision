@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://192.168.1.174:5000/api/";
+    private static final String BASE_URL = "http://192.168.78.202:5000/api/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
